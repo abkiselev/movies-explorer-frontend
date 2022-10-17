@@ -1,8 +1,11 @@
+import Header from "../Header/Header";
+import './App.css'
 
 function App() {
   return (
-    <div className="App">
-    </div>
+    <section className="app">
+      <Header />
+    </section>
   );
 }
 

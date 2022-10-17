@@ -1,9 +1,9 @@
 
-function App() {
+function Main() {
   return (
     <div className="App">
     </div>
   );
 }
 
-export default App;
+export default Main;
