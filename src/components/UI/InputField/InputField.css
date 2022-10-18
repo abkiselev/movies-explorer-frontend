@@ -26,18 +26,14 @@
 }
 
 .input__field:focus ~ .input__label, 
-.input__field:not(:focus):valid ~ .input__label {
-    bottom: 50px;
-    font-size: 10px;
-}
-
-.input__field:not(:empty) ~ .input__label {
+.input__field:not(:focus):valid ~ .input__label,
+.input__field:not(:placeholder-shown) ~ .input__label {
     bottom: 50px;
     font-size: 10px;
 }
 
 .input__label {
-    transition: all 0.3s ease-in-out;
+    transition: all 0.2s ease-in-out;
     position: absolute;
     font-size: 14px;
     line-height: 12px;

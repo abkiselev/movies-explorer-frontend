@@ -23,3 +23,13 @@
 .button:hover {
     opacity: 0.8;
 }
+
+@media (max-width: 450px) {
+    .button {
+        font-size: 12px;
+    }
+
+    .button_small {
+        padding: 5px 12px;
+    }
+}

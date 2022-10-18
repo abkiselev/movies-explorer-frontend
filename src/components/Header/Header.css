@@ -23,8 +23,20 @@
     gap: 30px;
 }
 
-/* .header__link {
-    height: min-content;
-} */
+@media (max-width: 768px) {
+    .header__navbar {
+        padding: 18px 30px;
+    }
+}
+
+@media (max-width: 450px) {
+    .header__navbar {
+        padding: 18px 15px;
+    }
+
+    .header__links {
+        gap: 14px;
+    }
+}
 
 

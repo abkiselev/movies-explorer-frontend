@@ -10,13 +10,13 @@ function Register() {
     <section className="register">
       <img className="register__logo" src={logo} alt="Поиск фильмов" />
       <h1 className="register__title">Добро пожаловать!</h1>
-      <Form>
+      <Form buttonText='Зарегистрироваться'>
         <InputField type="text" name="name" placeholder="Имя" onChange={onChange} required={true} />
         <InputField type="email" name="email" placeholder="E-mail" onChange={onChange} required={true} />
         <InputField type="password" name="password" placeholder="Пароль" onChange={onChange} required={true} />
       </Form>
       <p className="register__text">
-        Уже зарегистрированы? <Links text="Войти" color="green" to="/sign-in" />{' '}
+        Уже зарегистрированы? <Links text="Войти" color="green" to="/sign-in" />
       </p>
     </section>
   )

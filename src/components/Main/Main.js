@@ -1,4 +1,5 @@
 import Header from '../Header/Header'
+import Heading from '../Heading/Heading'
 import { useNavigate, useLocation } from 'react-router-dom'
 import './Main.css'
 
@@ -8,12 +9,13 @@ function Main() {
   console.log(location.pathname)
 
   const onLoginClick = () => {
-    navigate('/session-timed-out')
+    navigate('/sign-in')
   }
 
   return (
-    <section className="app">
+    <section className="main">
       <Header onLoginClick={onLoginClick} />
+      <Heading />
     </section>
   )
 }

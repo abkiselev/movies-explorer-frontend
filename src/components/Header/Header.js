@@ -14,13 +14,9 @@ function Header({ onLoginClick }) {
         <ul className="header__links">
           <li className="header__link">
             <Links to="/sign-up" text="Регистрация" />
-            {/* <Link className="header__link" to='/sign-up'>Регистрация</Link> */}
           </li>
           <li className="header__link">
-            <Button onClick={onLoginClick} text="Войти" />
-            {/* <Link className="header__link" to="/sign-up">
-              Войти
-            </Link> */}
+            <Button onClick={onLoginClick} text="Войти" status='small' />
           </li>
         </ul>
       </nav>
