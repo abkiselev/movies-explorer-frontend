@@ -19,7 +19,12 @@
     padding: 0;
     margin: 0;
     display: flex;
+    align-items: center;
     gap: 30px;
 }
+
+/* .header__link {
+    height: min-content;
+} */
 
 

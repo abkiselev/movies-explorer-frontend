@@ -1,0 +1,30 @@
+.register {
+    height: 100vh;
+    max-width: 395px;
+    margin: auto;
+    padding: 0 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;    
+}
+
+.register__logo {
+   margin-right: auto;
+}
+
+.register__title {
+    display: inline;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 29px;
+    width: 100%;
+    margin: 40px 0 45px;
+}
+
+.register__text {
+    margin-top: 16px;
+    font-size: 14px;
+    line-height: 17px;
+    color: #A0A0A0;
+}
