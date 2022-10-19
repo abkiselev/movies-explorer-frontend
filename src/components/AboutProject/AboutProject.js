@@ -1,4 +1,4 @@
-import './About.css'
+import './AboutProject.css'
 import Title from '../Title/Title'
 import React, { forwardRef } from 'react'
 
@@ -41,4 +41,4 @@ export default forwardRef((_, ref) => {
   )
 })
 
-// export default About
+// export default AboutProject

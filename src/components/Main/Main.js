@@ -1,8 +1,9 @@
 import Header from '../Header/Header'
-import Heading from '../Heading/Heading'
-import About from '../About/About'
-import Technologies from '../Technologies/Technologies'
-import Student from '../Student/Student'
+import Promo from '../Promo/Promo'
+import AboutProject from '../AboutProject/AboutProject'
+import Techs from '../Techs/Techs'
+import AboutMe from '../AboutMe/AboutMe'
+import Portfolio from '../Portfolio/Portfolio'
 import Footer from '../Footer/Footer'
 import { useNavigate } from 'react-router-dom'
 import './Main.css'
@@ -33,10 +34,11 @@ function Main() {
   return (
     <section className="main">
       <Header onLoginClick={onLoginClick} />
-      <Heading />
-      <About ref={about} />
-      <Technologies ref={technologies} />
-      <Student ref={student} />
+      <Promo />
+      <AboutProject ref={about} />
+      <Techs ref={technologies} />
+      <AboutMe ref={student} />
+      <Portfolio />
       <Footer />
     </section>
   )

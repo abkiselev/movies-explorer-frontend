@@ -7,6 +7,11 @@
     transition: all 0.15s ease-in-out;
 }
 
+._active {
+    font-weight: bold;
+    pointer-events: none;
+}
+
 .link_red {
     color: #EE3465;
 }

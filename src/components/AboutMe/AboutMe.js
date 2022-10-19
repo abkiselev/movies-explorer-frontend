@@ -1,4 +1,4 @@
-import './Student.css'
+import './AboutMe.css'
 import Title from '../Title/Title'
 import myPhoto from '../../images/me.jpg'
 import React, { forwardRef } from 'react'
@@ -32,46 +32,9 @@ export default forwardRef((_, ref) => {
           </div>
           <img className="student__img" src={myPhoto} alt="Мое фото" />
         </article>
-
-        <ul className="portfolio">
-          <h3 className="portfolio__title">Портфолио</h3>
-          <li>
-            <a
-              className="portfolio__link"
-              href="https://github.com/abkiselev?tab=repositories"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <span>Статичный сайт</span>
-              <span className="portfolio__arrow">&#8599;</span>
-            </a>
-          </li>
-          <li>
-            <a
-              className="portfolio__link"
-              href="https://github.com/abkiselev?tab=repositories"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <span>Адаптивный сайт</span>
-              <span className="portfolio__arrow">&#8599;</span>
-            </a>
-          </li>
-          <li>
-            <a
-              className="portfolio__link"
-              href="https://github.com/abkiselev?tab=repositories"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <span>Одностраничное приложение</span>
-              <span className="portfolio__arrow">&#8599;</span>
-            </a>
-          </li>
-        </ul>
       </div>
     </section>
   )
 })
 
-// export default Student
+// export default AboutMe

@@ -1,4 +1,4 @@
-import './Technologies.css'
+import './Techs.css'
 import Title from '../Title/Title'
 import Tab from '../UI/Tab/Tab'
 import React, { forwardRef } from 'react'
@@ -44,4 +44,4 @@ export default forwardRef((_, ref) => {
   )
 })
 
-// export default Technologies
+// export default Techs
