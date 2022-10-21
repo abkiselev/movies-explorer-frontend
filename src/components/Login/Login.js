@@ -8,14 +8,14 @@ function Login() {
   const onChange = () => {}
   return (
     <section className="login">
-    <img className="login__logo" src={logo} alt="Поиск фильмов" />
+      <img className="login__logo" src={logo} alt="Поиск фильмов" />
       <h1 className="login__title">Рады видеть!</h1>
-      <Form buttonText='Войти' >
+      <Form buttonText="Войти">
         <InputField type="email" name="email" placeholder="E-mail" onChange={onChange} required={true} />
         <InputField type="password" name="password" placeholder="Пароль" onChange={onChange} required={true} />
       </Form>
       <p className="login__text">
-        Еще не зарегистрированы? <Links text="Регистрация" color="green" to="/sign-up" />
+        Еще не зарегистрированы? <Links text="Регистрация" color="green" to="/signup" />
       </p>
     </section>
   )

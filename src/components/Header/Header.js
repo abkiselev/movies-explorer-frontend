@@ -30,7 +30,7 @@ function Header({ onLoginClick }) {
                   <Links to="/movies" text="Фильмы" isActive={pathname === '/movies'} />
                 </li>
                 <li className="header__link" onClick={() => setIsMenuChecked(false)}>
-                  <Links to="/saved" text="Сохраненные фильмы" isActive={pathname === '/saved'} />
+                  <Links to="/saved-movies" text="Сохраненные фильмы" isActive={pathname === '/saved-movies'} />
                 </li>
               </ul>
               <ul className="header__links header__links_profile">
@@ -54,7 +54,7 @@ function Header({ onLoginClick }) {
         ) : (
           <ul className="header__links">
             <li className="header__link">
-              <Links to="/sign-up" text="Регистрация" />
+              <Links to="/signup" text="Регистрация" />
             </li>
             <li className="header__link">
               <Button onClick={onLoginClick} text="Войти" status="small" />

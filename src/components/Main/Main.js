@@ -28,7 +28,7 @@ function Main() {
   }, [hash])
 
   const onLoginClick = () => {
-    navigate('/sign-in')
+    navigate('/signin')
   }
 
   return (
