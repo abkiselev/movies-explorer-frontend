@@ -1,5 +1,5 @@
-import Links from '../UI/Link/Link'
 import './Error.css'
+import Links from '../UI/Link/Link'
 
 function Error() {
   return (

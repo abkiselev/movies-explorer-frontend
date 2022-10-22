@@ -1,6 +1,7 @@
 .header {
     max-width: 1280px;
     margin: 0 auto;
+    width: 100%;
 }
 
 .header__navbar {
@@ -87,7 +88,7 @@
         align-items: center;
         position: fixed;
         top: 25px;
-        right: 20px;
+        right: 30px;
     
         width: 26px;
         height: 26px;
@@ -186,7 +187,9 @@
         width: 100%;
     }
 
-
+    .menu__btn {
+        right: 20px;
+    }
 }
 
 

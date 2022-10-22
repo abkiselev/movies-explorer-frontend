@@ -1,3 +1,4 @@
+import './Main.css'
 import Header from '../Header/Header'
 import Promo from '../Promo/Promo'
 import AboutProject from '../AboutProject/AboutProject'
@@ -6,7 +7,6 @@ import AboutMe from '../AboutMe/AboutMe'
 import Portfolio from '../Portfolio/Portfolio'
 import Footer from '../Footer/Footer'
 import { useNavigate } from 'react-router-dom'
-import './Main.css'
 import { useEffect, useRef } from 'react'
 import { useLocation } from 'react-router-dom'
 
@@ -16,8 +16,6 @@ function Main() {
   const technologies = useRef()
   const student = useRef()
   const navigate = useNavigate()
-
-  console.log(hash)
 
   useEffect(() => {
     if (hash) {

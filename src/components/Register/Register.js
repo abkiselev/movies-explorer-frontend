@@ -1,7 +1,7 @@
+import './Register.css'
 import Form from '../Form/Form'
 import Links from '../UI/Link/Link'
 import InputField from '../UI/InputField/InputField'
-import './Register.css'
 import logo from '../../images/logo.png'
 
 function Register() {

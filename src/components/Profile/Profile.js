@@ -1,6 +1,3 @@
-import Form from '../Form/Form'
-import Links from '../UI/Link/Link'
-import InputField from '../UI/InputField/InputField'
 import './Profile.css'
 import Header from '../Header/Header'
 import LinkButton from '../UI/LinkButton/LinkButton'

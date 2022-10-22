@@ -1,16 +1,15 @@
+import './Header.css'
 import { Link, useLocation } from 'react-router-dom'
 import { useState } from 'react'
 import logo from '../../images/logo.png'
 import Links from '../UI/Link/Link'
 import Button from '../UI/Button/Button'
-import './Header.css'
 
 function Header({ onLoginClick }) {
   const [user, setUser] = useState(true)
   const [isMenuChecked, setIsMenuChecked] = useState(false)
 
   const { pathname } = useLocation()
-  console.log(pathname)
 
   return (
     <header className="header">

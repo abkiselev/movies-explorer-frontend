@@ -1,6 +1,5 @@
-// import { useNavigate, useLocation } from 'react-router-dom'
-import Button from '../UI/Button/Button'
 import './Form.css'
+import Button from '../UI/Button/Button'
 
 function Form({ onSubmit, children, buttonText }) {
   return (

@@ -1,5 +1,5 @@
-import LinkTab from '../UI/LinkTab/LinkTab'
 import './NavTab.css'
+import LinkTab from '../UI/LinkTab/LinkTab'
 
 function NavTab() {
   return (
