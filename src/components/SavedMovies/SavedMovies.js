@@ -6,23 +6,22 @@ import MoviesCardList from '../MoviesCardList/MoviesCardList'
 import Preloader from '../Preloader/Preloader'
 import SearchForm from '../SearchForm/SearchForm'
 
-function SavedMovies() {
+function SavedMovies({ setLockScroll }) {
   const [list, setList] = useState([])
   const [loaded, setLoaded] = useState(false)
 
-  useEffect(()=> {
+  useEffect(() => {
     setList(Array(3).fill())
     setTimeout(() => setLoaded(true), 1000)
   }, [])
 
   return (
-    <section className="movies">
-      <Header />
-      <SearchForm />
-      {loaded
-        ? <MoviesCardList list={list} />
-        : <Preloader />
-      }
+    <section className='movies'>
+      <Header setLockScroll={setLockScroll} />
+      <main>
+        <SearchForm />
+        {loaded ? <MoviesCardList list={list} /> : <Preloader />}
+      </main>
       <Footer />
     </section>
   )

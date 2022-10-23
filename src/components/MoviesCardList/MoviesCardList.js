@@ -5,7 +5,7 @@ import MoviesCard from '../MoviesCard/MoviesCard'
 function MoviesCardList({ list }) {
   return (
     <section className="movies-list">
-      <div className="movies-list__wrapper">
+      <section className="movies-list__wrapper">
         <ul className="movies-list__listing">
           
 
@@ -17,7 +17,7 @@ function MoviesCardList({ list }) {
         </ul>
 
         
-      </div>
+      </section>
     </section>
   )
 }

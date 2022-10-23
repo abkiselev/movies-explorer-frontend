@@ -4,3 +4,8 @@
     font-family: 'Inter', 'Arial', sans-serif;
     font-display: swap;    
 }
+
+.app_locked {
+    height: 100vh;
+    overflow: hidden;
+}

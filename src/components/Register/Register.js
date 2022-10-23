@@ -2,7 +2,7 @@ import './Register.css'
 import Form from '../Form/Form'
 import Links from '../UI/Link/Link'
 import InputField from '../UI/InputField/InputField'
-import logo from '../../images/logo.png'
+import logo from '../../images/logo.svg'
 
 function Register() {
   const onChange = () => {}

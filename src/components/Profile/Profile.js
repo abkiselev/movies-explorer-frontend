@@ -2,12 +2,12 @@ import './Profile.css'
 import Header from '../Header/Header'
 import LinkButton from '../UI/LinkButton/LinkButton'
 
-function Profile() {
+function Profile({ setLockScroll }) {
   const onChange = () => {}
   return (
     <section className="profile">
-      <Header />
-      <div className="profile__wrapper">
+      <Header setLockScroll={setLockScroll} />
+      <main className="profile__wrapper">
         <h1 className="profile__title">Привет, Виталий</h1>
         <form className="profile__form">
           <fieldset className="profile__fieldset">
@@ -45,8 +45,8 @@ function Profile() {
             <LinkButton type="submit" text="Редактировать" to="" />
           </div>
         </form>
-        <LinkButton text="Выйти из аккаунта" color="red" />
-      </div>
+        <LinkButton type="button" text="Выйти из аккаунта" color="red" />
+      </main>
     </section>
   )
 }

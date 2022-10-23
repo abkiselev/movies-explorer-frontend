@@ -32,6 +32,10 @@
     pointer-events: none;
 }
 
+.header__link_main {
+    display: none;
+}
+
 .header__link_profile {
     text-decoration: none;
     font-weight: 500;
@@ -39,11 +43,13 @@
     line-height: 16px;
     color: #000;
     transition: all 0.15s ease-in-out;
+    display: flex;
+    align-items: center;
 }
 
 .header__link_profile::after {
-    content: url('../../images/icon_profile.png');
-    padding-left: 20px;
+    content: url('../../images/icon_profile.svg');
+    padding-left: 17px;
     position: relative;
     bottom: -2px;
     cursor: pointer;
@@ -73,10 +79,12 @@
     ._checked > span {
         transform: rotate(45deg);                
     }
+
     ._checked > span::before {
         top: 0;
         opacity: 0;
     }
+
     ._checked > span::after {
         top: 0 !important;
         transform: rotate(90deg);
@@ -86,9 +94,8 @@
     .menu__btn {
         display: flex;
         align-items: center;
-        position: fixed;
-        top: 25px;
-        right: 30px;
+        position: relative;
+        top: -10px;
     
         width: 26px;
         height: 26px;
@@ -167,6 +174,10 @@
         font-size: 18px;
     }
 
+    .header__link_main {
+        display: block;
+    }
+
     ._active {
         padding-bottom: 5px;
         border-bottom: 1px solid #000;
@@ -185,10 +196,6 @@
 
     .header__nav {
         width: 100%;
-    }
-
-    .menu__btn {
-        right: 20px;
     }
 }
 

@@ -10,7 +10,7 @@ import { useNavigate } from 'react-router-dom'
 import { useEffect, useRef } from 'react'
 import { useLocation } from 'react-router-dom'
 
-function Main() {
+function Main({ setLockScroll }) {
   const { hash } = useLocation()
   const about = useRef()
   const technologies = useRef()
@@ -30,13 +30,15 @@ function Main() {
   }
 
   return (
-    <section className="main">
-      <Header onLoginClick={onLoginClick} />
-      <Promo />
-      <AboutProject ref={about} />
-      <Techs ref={technologies} />
-      <AboutMe ref={student} />
-      <Portfolio />
+    <section className='main'>
+      <Header setLockScroll={setLockScroll} onLoginClick={onLoginClick} />
+      <main>
+        <Promo />
+        <AboutProject ref={about} />
+        <Techs ref={technologies} />
+        <AboutMe ref={student} />
+        <Portfolio />
+      </main>
       <Footer />
     </section>
   )

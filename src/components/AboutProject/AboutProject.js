@@ -5,7 +5,7 @@ import React, { forwardRef } from 'react'
 export default forwardRef((_, ref) => {
   return (
     <section ref={ref} id="about" className="about">
-      <div className="about__wrapper">
+      <section className="about__wrapper">
         <Title title="O проекте" />
         <ul className="about__info">
           <li className="article">
@@ -36,7 +36,7 @@ export default forwardRef((_, ref) => {
             <p className="flow__text">Front-end</p>
           </li>
         </ul>
-      </div>
+      </section>
     </section>
   )
 })

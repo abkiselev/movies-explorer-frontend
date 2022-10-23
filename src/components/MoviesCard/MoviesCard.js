@@ -8,16 +8,18 @@ function MoviesCard() {
   const [liked, setLiked] = useState(false)
 
   return (
-    <li className="movies-card">
-      <div className="movies-card__heading">
-        <div className="movies-card__title">
-          <h3 className="movies-card__name">33 слова о дизайне</h3>
-          <p className="movies-card__time">1ч 47м</p>
+    <li className='movies-card'>
+      <div className='movies-card__heading'>
+        <div className='movies-card__title'>
+          <h3 className='movies-card__name'>33 слова о дизайне</h3>
+          <p className='movies-card__time'>1ч 47м</p>
         </div>
-        <img className="movies-card__like" src={liked ? savedIcon : saveIcon} alt="Сохранить" onClick={() => setLiked(!liked)} />
+        <button type='button' className='movies-card__like' onClick={() => setLiked(!liked)}>
+          <img src={liked ? savedIcon : saveIcon} alt='Сохранить' />
+        </button>
       </div>
-      
-        <img className="movies-card__img" src={filmPic} alt="Фильм" />
+
+      <img className='movies-card__img' src={filmPic} alt='Фильм' />
     </li>
   )
 }

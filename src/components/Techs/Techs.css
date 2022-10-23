@@ -62,6 +62,10 @@
 }
 
 @media (max-width: 470px) {
+    .technologies {
+        background-color: #fff;
+    }
+
     .technologies__container {    
         padding: 70px 20px;
     }

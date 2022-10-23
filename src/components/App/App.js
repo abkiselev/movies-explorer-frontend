@@ -7,18 +7,22 @@ import Login from '../Login/Login'
 import Error from '../Error/Error'
 import Profile from '../Profile/Profile'
 import SavedMovies from '../SavedMovies/SavedMovies'
+import { useState } from 'react'
 
 function App() {
+  const [lockScroll, setLockScroll] = useState(false)
+  console.log(lockScroll)
+
   return (
-    <section className="app">
+    <section className={`app ${lockScroll && 'app_locked'}`}>
       <Routes>
-        <Route path="/" element={<Main />} />
-        <Route path="/movies" element={<Movies />} />
-        <Route path="/saved-movies" element={<SavedMovies />} />
-        <Route path="/signup" element={<Register />} />
-        <Route path="/signin" element={<Login />} />
-        <Route path="/profile" element={<Profile />} />
-        <Route path="*" element={<Error />} />
+        <Route path='/' element={<Main setLockScroll={setLockScroll} />} />
+        <Route path='/movies' element={<Movies setLockScroll={setLockScroll} />} />
+        <Route path='/saved-movies' element={<SavedMovies setLockScroll={setLockScroll} />} />
+        <Route path='/signup' element={<Register />} />
+        <Route path='/signin' element={<Login />} />
+        <Route path='/profile' element={<Profile setLockScroll={setLockScroll} />} />
+        <Route path='*' element={<Error />} />
       </Routes>
     </section>
   )
