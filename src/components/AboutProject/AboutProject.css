@@ -1,0 +1,132 @@
+.about {
+    max-width: 1280px;
+    margin: 0 auto;
+}
+
+.about__wrapper {
+    padding: 90px 70px;
+}
+
+.about__title {
+    font-weight: 400;
+    font-size: 22px;
+    line-height: 27px;
+    margin: 0;
+    border-bottom: 1px solid #000;
+    padding-bottom: 23px;
+}
+
+.about__info {
+    list-style-type: none;
+    margin: 0;
+    padding: 70px 0 110px 0;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 50px;
+}
+
+.article__title {
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 24px;
+    margin: 0 0 25px;
+}
+
+.article__text {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    margin: 0;
+}
+
+.about__flow {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: flex-start;
+}
+
+.flow:first-child  {
+    flex-basis: 20%;
+}
+
+.flow:last-child  {
+    flex-basis: 80%;
+}
+
+.flow__title {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    text-align: center;
+    margin: 0;
+}
+
+.flow:first-child .flow__title {
+    background-color: #2BE080;
+    padding: 9px 0;
+}
+
+.flow:last-child .flow__title {
+    background-color: #F2F2F2;
+    padding: 9px 0;
+}
+
+.flow__text {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    text-align: center;
+    color: #A0A0A0;
+    margin: 14px 0 0 0;
+}
+
+
+
+@media (max-width: 768px) {
+    .about__wrapper {
+        padding: 90px 50px;
+    }
+}
+
+@media (max-width: 470px) {
+    .about__wrapper {
+        padding: 70px 20px;
+    }
+
+    .about__info {
+        flex-wrap: wrap;
+        padding: 60px 0;
+    }
+
+    .about__title {
+        font-size: 18px;        
+    }
+
+    .article__title {
+        font-size: 18px;
+        margin: 0 0 16px;
+    }
+
+    .article__text {
+        font-size: 12px;
+    }
+
+    .flow:first-child  {
+        flex-basis: 35%;
+    }
+    
+    .flow:last-child  {
+        flex-basis: 65%;
+    }
+
+    .flow__title {
+        font-size: 12px;
+    }
+
+    .flow__text {
+        font-size: 12px;
+    }
+}

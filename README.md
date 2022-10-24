@@ -1,1 +1,5 @@
-# movies-explorer-frontend
+# Фронтенд дипломного проекта
+
+ссылка на дизайн - https://disk.yandex.ru/d/cVp52CVbFDSTTA
+
+чтобы увидеть Хедэр Юзера - надо поменять стейт user на true в компоненте Header 

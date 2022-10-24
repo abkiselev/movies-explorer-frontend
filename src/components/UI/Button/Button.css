@@ -1,0 +1,35 @@
+.button {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 16px;    
+    transition: all 0.15s ease-in-out;
+    background-color: #2BE080;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.button_main {
+    color: white;
+    padding: 15px;
+    width: 100%;
+}
+
+.button_small {
+    color: #000;
+    padding: 8px 20px;
+}
+
+.button:hover {
+    opacity: 0.8;
+}
+
+@media (max-width: 450px) {
+    .button {
+        font-size: 12px;
+    }
+
+    .button_small {
+        padding: 5px 12px;
+    }
+}

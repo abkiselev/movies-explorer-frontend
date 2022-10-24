@@ -1,0 +1,12 @@
+.heading__tabs {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    gap: 10px;
+}
+
+@media (max-width: 450px) {
+    .heading__tabs {
+        gap: 6px;
+    }
+}

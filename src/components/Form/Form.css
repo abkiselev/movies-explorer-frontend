@@ -1,0 +1,14 @@
+.form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    gap: 60px;
+}
+
+.form__inputs {
+    height: 265px;
+    border: none;
+    padding: 0;
+    margin: 0;
+}
