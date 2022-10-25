@@ -1,13 +1,15 @@
 import './Header.css'
 import { Link, useLocation } from 'react-router-dom'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useContext } from 'react'
+import { UserContext } from '../../contexts/UserContext'
 import logo from '../../images/logo.svg'
 import Links from '../UI/Link/Link'
 import Button from '../UI/Button/Button'
 
 function Header({ setLockScroll, onLoginClick }) {
-  const [user, setUser] = useState(true)
+  const currentUser = useContext(UserContext);
   const [isMenuChecked, setIsMenuChecked] = useState(false)
+  console.log(currentUser)
 
   const { pathname } = useLocation()
 
@@ -24,7 +26,7 @@ function Header({ setLockScroll, onLoginClick }) {
           <img className='header__logo' src={logo} alt='Поиск фильмов' />
         </Link>
 
-        {user ? (
+        {currentUser.length ? (
           <>
             <nav className={`header__nav ${isMenuChecked && 'header__nav_visible'}`}>
               <ul className='header__links header__links_main'>
