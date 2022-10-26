@@ -7,47 +7,73 @@ import Error from '../components/Error/Error'
 import Profile from '../components/Profile/Profile'
 import SavedMovies from '../components/SavedMovies/SavedMovies'
 
-const routes = (loggedIn, setCurrentUser, setLockScroll) => [
+const routes = (loggedIn, setLoggedIn, setCurrentUser, setLockScroll, setIsTooltipVisible, setTooltipMessage) => [
   {
     path: '/',
     element: <Main setLockScroll={setLockScroll} />,
   },
   {
     path: '/signup',
-    element: <Register />,
+    element: loggedIn ? (
+      <Navigate to="/movies" />
+    ) : (
+      <Register setIsTooltipVisible={setIsTooltipVisible} setTooltipMessage={setTooltipMessage} />
+    ),
   },
   {
     path: '/signin',
-    element: <Login setCurrentUser={setCurrentUser} />,
+    element: loggedIn ? (
+      <Navigate to="/movies" />
+    ) : (
+      <Login
+        setLoggedIn={setLoggedIn}
+        setCurrentUser={setCurrentUser}
+        setIsTooltipVisible={setIsTooltipVisible}
+        setTooltipMessage={setTooltipMessage}
+      />
+    ),
   },
   {
     path: '/movies',
-    element: loggedIn ? <Movies setLockScroll={setLockScroll} /> : <Navigate to='/signin' />,
+    element: loggedIn ? (
+      <Movies
+        setLockScroll={setLockScroll}
+        setIsTooltipVisible={setIsTooltipVisible}
+        setTooltipMessage={setTooltipMessage}
+      />
+    ) : (
+      <Navigate to="/signin" />
+    ),
   },
   {
     path: '/saved-movies',
-    element: loggedIn ? <SavedMovies setLockScroll={setLockScroll} /> : <Navigate to='/signin' />,
+    element: loggedIn ? (
+      <SavedMovies
+        setLockScroll={setLockScroll}
+        setIsTooltipVisible={setIsTooltipVisible}
+        setTooltipMessage={setTooltipMessage}
+      />
+    ) : (
+      <Navigate to="/signin" />
+    ),
   },
   {
     path: '/profile',
-    element: loggedIn ? <Profile setCurrentUser={setCurrentUser} setLockScroll={setLockScroll} /> : <Navigate to='/signin' />,
+    element: loggedIn ? (
+      <Profile
+        setCurrentUser={setCurrentUser}
+        setLockScroll={setLockScroll}
+        setIsTooltipVisible={setIsTooltipVisible}
+        setTooltipMessage={setTooltipMessage}
+      />
+    ) : (
+      <Navigate to="/signin" />
+    ),
   },
   {
     path: '*',
     element: <Error />,
   },
 ]
-
-{
-  /* <Routes>
-          <Route path='/' element={<Main setLockScroll={setLockScroll} />} />
-          <Route path='/movies' element={<Movies setLockScroll={setLockScroll} />} />
-          <Route path='/saved-movies' element={<SavedMovies setLockScroll={setLockScroll} />} />
-          <Route path='/signup' element={<Register />} />
-          <Route path='/signin' element={<Login />} />
-          <Route path='/profile' element={<Profile setLockScroll={setLockScroll} />} />
-          <Route path='*' element={<Error />} />
-        </Routes> */
-}
 
 export default routes

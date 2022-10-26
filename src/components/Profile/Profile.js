@@ -1,27 +1,63 @@
 import './Profile.css'
+import { useEffect, useState, useContext } from 'react'
+import { UserContext } from '../../contexts/UserContext'
+import UseValidation from '../../hooks/useValidation'
+import { updateUser } from '../../utils/MainApi'
 import Header from '../Header/Header'
 import LinkButton from '../UI/LinkButton/LinkButton'
 
-function Profile({ setLockScroll }) {
-  const onChange = () => {}
+function Profile({ setLockScroll, setIsTooltipVisible, setTooltipMessage, setCurrentUser }) {
+  const currentUser = useContext(UserContext)
+  const [submitButtonText, setSubmitButtonText] = useState('Редактировать')
+  const { isFormValid, values, handleValues, errors, setValues } = UseValidation()
+
+  useEffect(() => {
+    setValues({ email: currentUser.email, name: currentUser.name })
+  }, [])
+
+  function handleUpdate(e) {
+    e.preventDefault()
+    setSubmitButtonText('Обновляем...')
+
+    const { email, name } = values
+
+    updateUser({ email, name })
+      .then((user) => {
+        console.log(user)
+        setIsTooltipVisible(true)
+        setTooltipMessage({ message: 'Обновлено!', status: 'ok' })
+        setCurrentUser(user.data)
+      })
+      .catch((err) => {
+        setIsTooltipVisible(true)
+        setTooltipMessage({ message: err.message || 'Попробуйте еще раз, что-то не так...', status: 'error' })
+        console.log(err)
+      })
+      .finally(() => {
+        setSubmitButtonText('Редактировать')
+      })
+  }
+
   return (
     <section className="profile">
       <Header setLockScroll={setLockScroll} />
       <main className="profile__wrapper">
-        <h1 className="profile__title">Привет, Виталий</h1>
-        <form className="profile__form">
+        <h1 className="profile__title">Привет, {currentUser.name}</h1>
+        <form onSubmit={handleUpdate} className="profile__form">
           <fieldset className="profile__fieldset">
             <div className="profile__inputfield">
               <label className="profile__label" htmlFor="name">
                 Имя
               </label>
               <input
+                minLength="2"
+                maxLength="30"
                 className="profile__input"
                 id="name"
                 type="text"
                 name="name"
-                value="Виталий"
-                onChange={onChange}
+                value={values.name || ''}
+                onChange={handleValues}
                 required
               />
             </div>
@@ -34,15 +70,16 @@ function Profile({ setLockScroll }) {
                 id="email"
                 type="email"
                 name="email"
-                value="pochta@yandex.ru"
-                onChange={onChange}
+                value={values.email || ''}
+                onChange={handleValues}
                 required
               />
             </div>
-            <p className="profile__error"></p>
+            <p className="profile__error">{errors.name}</p>
+            <p className="profile__error">{errors.email}</p>
           </fieldset>
           <div className="profile__button">
-            <LinkButton type="submit" text="Редактировать" to="" />
+            <LinkButton disabled={!isFormValid} type="submit" text={submitButtonText} to="" />
           </div>
         </form>
         <LinkButton type="button" text="Выйти из аккаунта" color="red" />
