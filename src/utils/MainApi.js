@@ -42,3 +42,18 @@ export const updateUser = ({ name, email }) => {
     body: JSON.stringify({ name, email }),
   }).then((res) => getResponse(res))
 }
+
+export const likeMovie = (movie) => {
+  return fetch(`${BASE_URL}/movies/`, {
+    method: 'POST',
+    credentials: 'include',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(movie),
+  }).then((res) => getResponse(res))
+}
+
+export const getLikedMovies = () => {
+  return fetch(`${BASE_URL}/movies`, { credentials: 'include' }).then((res) => getResponse(res))
+}

@@ -26,14 +26,14 @@ function Login({ setLoggedIn, setIsTooltipVisible, setTooltipMessage }) {
     login({ email, password })
       .then((user) => {
         console.log(user)
-        setIsTooltipVisible(true)
         setTooltipMessage({ message: 'Вы вошли, хорошего поиска фильмов', status: 'ok' })
+        setIsTooltipVisible(true)
         setLoggedIn(true)
         navigate('/')
       })
       .catch((err) => {
-        setIsTooltipVisible(true)
         setTooltipMessage({ message: err.message || 'Попробуйте еще раз, что-то не так...', status: 'error' })
+        setIsTooltipVisible(true)
         console.log(err)
       })
       .finally(() => {

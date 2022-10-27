@@ -12,7 +12,7 @@ function Profile({ setLockScroll, setIsTooltipVisible, setTooltipMessage, setCur
   const { isFormValid, values, handleValues, errors, setValues } = UseValidation()
 
   useEffect(() => {
-    setValues({ email: currentUser.email, name: currentUser.name })
+    setValues({ email: currentUser.user.email, name: currentUser.user.name })
   }, [])
 
   function handleUpdate(e) {
@@ -23,10 +23,9 @@ function Profile({ setLockScroll, setIsTooltipVisible, setTooltipMessage, setCur
 
     updateUser({ email, name })
       .then((user) => {
-        console.log(user)
         setIsTooltipVisible(true)
         setTooltipMessage({ message: 'Обновлено!', status: 'ok' })
-        setCurrentUser(user.data)
+        setCurrentUser({ ...currentUser, user: user.data })
       })
       .catch((err) => {
         setIsTooltipVisible(true)
@@ -42,7 +41,7 @@ function Profile({ setLockScroll, setIsTooltipVisible, setTooltipMessage, setCur
     <section className="profile">
       <Header setLockScroll={setLockScroll} />
       <main className="profile__wrapper">
-        <h1 className="profile__title">Привет, {currentUser.name}</h1>
+        <h1 className="profile__title">Привет, {currentUser.user.name}</h1>
         <form onSubmit={handleUpdate} className="profile__form">
           <fieldset className="profile__fieldset">
             <div className="profile__inputfield">

@@ -7,7 +7,15 @@ import Error from '../components/Error/Error'
 import Profile from '../components/Profile/Profile'
 import SavedMovies from '../components/SavedMovies/SavedMovies'
 
-const routes = (loggedIn, setLoggedIn, setCurrentUser, setLockScroll, setIsTooltipVisible, setTooltipMessage) => [
+const routes = (
+  loggedIn,
+  setLoggedIn,
+  currentUser,
+  setCurrentUser,
+  setLockScroll,
+  setIsTooltipVisible,
+  setTooltipMessage
+) => [
   {
     path: '/',
     element: <Main setLockScroll={setLockScroll} />,
@@ -40,6 +48,7 @@ const routes = (loggedIn, setLoggedIn, setCurrentUser, setLockScroll, setIsToolt
         setLockScroll={setLockScroll}
         setIsTooltipVisible={setIsTooltipVisible}
         setTooltipMessage={setTooltipMessage}
+        setCurrentUser={setCurrentUser}
       />
     ) : (
       <Navigate to="/signin" />
