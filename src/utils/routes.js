@@ -61,6 +61,7 @@ const routes = (
         setLockScroll={setLockScroll}
         setIsTooltipVisible={setIsTooltipVisible}
         setTooltipMessage={setTooltipMessage}
+        setCurrentUser={setCurrentUser}
       />
     ) : (
       <Navigate to="/signin" />

@@ -1,11 +1,21 @@
 import './MoviesCard.css'
+import { useEffect, useState } from 'react'
+import { useLocation } from 'react-router-dom'
 import saveIcon from '../../images/icon_save.svg'
 import savedIcon from '../../images/icon_saved.svg'
-import { useState } from 'react'
-import { likeMovie } from '../../utils/MainApi'
+import removeIcon from '../../images/icon_remove.svg'
 
-function MoviesCard({ movie, currentUser, setCurrentUser }) {
-  const [liked, setLiked] = useState(false)
+function MoviesCard({ movie, currentUser, handleDislike, handleLike }) {
+  const [liked, setLiked] = useState(
+    currentUser.likedFilms.some((film) => film.movieId === movie.id)
+  )
+  const { pathname } = useLocation()
+
+  useEffect(() => {
+    currentUser.likedFilms.some((film) => film.movieId === movie.id)
+      ? setLiked(true)
+      : setLiked(false)
+  }, [currentUser.likedFilms])
 
   const transformDuration = (duration) => {
     if (duration <= 60) {
@@ -18,51 +28,42 @@ function MoviesCard({ movie, currentUser, setCurrentUser }) {
     return `${hours}ч ${minutes}м`
   }
 
-  const handleLike = () => {
-    console.log(movie)
-    const image = `https://api.nomoreparties.co/${movie.image.url}`
-    const thumbnail = `https://api.nomoreparties.co/${movie.image.formats.thumbnail.url}`
-    const movieId = movie.id
-    const { country, director, duration, year, description, trailerLink, nameRU, nameEN } = movie
-
-    likeMovie({
-      country,
-      director,
-      duration,
-      year,
-      description,
-      trailerLink,
-      nameRU,
-      nameEN,
-      image,
-      thumbnail,
-      movieId,
-    })
-      .then((mov) => {
-        console.log(mov)
-        setCurrentUser({ ...currentUser, likedFilms: currentUser.likedFilms.push(mov) })
-        setLiked(!liked)
-      })
-      .catch((err) => {
-        console.log(err)
-      })
-  }
-
   return (
-    <li className="movies-card">
-      <a href={movie.trailerLink} target="_blank" rel="noopener noreferrer" className="movies-card">
-        <div className="movies-card__heading">
-          <div className="movies-card__title">
-            <h3 className="movies-card__name">{movie.nameRU}</h3>
-            <p className="movies-card__time">{transformDuration(movie.duration)}</p>
+    <li className='movies-card'>
+      <a href={movie.trailerLink} target='_blank' rel='noopener noreferrer' className='movies-card'>
+        <div className='movies-card__heading'>
+          <div className='movies-card__title'>
+            <h3 className='movies-card__name'>{movie.nameRU}</h3>
+            <p className='movies-card__time'>{transformDuration(movie.duration)}</p>
           </div>
         </div>
 
-        <img className="movies-card__img" src={`https://api.nomoreparties.co/${movie.image.url}`} alt={movie.nameRU} />
+        <img
+          className='movies-card__img'
+          src={movie.image.url ? `https://api.nomoreparties.co/${movie.image.url}` : movie.image}
+          alt={movie.nameRU}
+        />
       </a>
-      <button type="button" className="movies-card__like" onClick={handleLike}>
-        <img src={liked ? savedIcon : saveIcon} alt="Сохранить" />
-      </button>
+
+      {pathname === '/movies' && (
+        <button
+          type='button'
+          className='movies-card__like'
+          onClick={liked ? () => handleDislike(movie.id) : () => handleLike(movie)}
+        >
+          <img src={liked ? savedIcon : saveIcon} alt='Сохранить' />
+        </button>
+      )}
+
+      {pathname === '/saved-movies' && (
+        <button
+          type='button'
+          className='movies-card__like'
+          onClick={() => handleDislike(movie._id)}
+        >
+          <img src={removeIcon} alt='Удалить' />
+        </button>
+      )}
     </li>
   )
 }

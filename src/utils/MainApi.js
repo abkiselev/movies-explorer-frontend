@@ -1,5 +1,5 @@
-// const BASE_URL = 'https://api.kiselevab.nomoredomains.icu'
-const BASE_URL = 'http://localhost:4000'
+const BASE_URL = 'https://api.kiselevab.nomoredomains.icu'
+// const BASE_URL = 'http://localhost:3000'
 
 const getResponse = (res) => {
   return res.json().then((json) => {
@@ -14,6 +14,7 @@ export const checkUser = () => {
 export const register = ({ email, name, password }) => {
   return fetch(`${BASE_URL}/signup`, {
     method: 'POST',
+    credentials: 'include',
     headers: {
       'Content-Type': 'application/json',
     },
@@ -43,6 +44,10 @@ export const updateUser = ({ name, email }) => {
   }).then((res) => getResponse(res))
 }
 
+export const getLikedMovies = () => {
+  return fetch(`${BASE_URL}/movies`, { credentials: 'include' }).then((res) => getResponse(res))
+}
+
 export const likeMovie = (movie) => {
   return fetch(`${BASE_URL}/movies/`, {
     method: 'POST',
@@ -54,6 +59,12 @@ export const likeMovie = (movie) => {
   }).then((res) => getResponse(res))
 }
 
-export const getLikedMovies = () => {
-  return fetch(`${BASE_URL}/movies`, { credentials: 'include' }).then((res) => getResponse(res))
+export const dislikeMovie = (id) => {
+  return fetch(`${BASE_URL}/movies/${id}`, {
+    method: 'DELETE',
+    credentials: 'include',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  }).then((res) => getResponse(res))
 }
