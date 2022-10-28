@@ -43,5 +43,3 @@ export default forwardRef((_, ref) => {
     </section>
   )
 })
-
-// export default Techs

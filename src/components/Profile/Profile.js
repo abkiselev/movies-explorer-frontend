@@ -1,15 +1,17 @@
 import './Profile.css'
 import { useEffect, useState, useContext } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { UserContext } from '../../contexts/UserContext'
 import UseValidation from '../../hooks/useValidation'
-import { updateUser } from '../../utils/MainApi'
+import { logOut, updateUser } from '../../utils/MainApi'
 import Header from '../Header/Header'
 import LinkButton from '../UI/LinkButton/LinkButton'
 
-function Profile({ setLockScroll, setIsTooltipVisible, setTooltipMessage, setCurrentUser }) {
+function Profile({ setLockScroll, setIsTooltipVisible, setTooltipMessage, setCurrentUser, setLoggedIn }) {
   const currentUser = useContext(UserContext)
   const [submitButtonText, setSubmitButtonText] = useState('Редактировать')
   const { isFormValid, values, handleValues, errors, setValues } = UseValidation()
+  const navigate = useNavigate()
 
   useEffect(() => {
     setValues({ email: currentUser.user.email, name: currentUser.user.name })
@@ -34,6 +36,20 @@ function Profile({ setLockScroll, setIsTooltipVisible, setTooltipMessage, setCur
       })
       .finally(() => {
         setSubmitButtonText('Редактировать')
+      })
+  }
+
+  function handleLogout() {
+    logOut()
+      .then(() => {
+        setLoggedIn(false)
+        setCurrentUser({})
+        navigate('/signin')
+      })
+      .catch((err) => {
+        setIsTooltipVisible(true)
+        setTooltipMessage({ message: err.message || 'Попробуйте еще раз, что-то не так...', status: 'error' })
+        console.log(err)
       })
   }
 
@@ -81,7 +97,7 @@ function Profile({ setLockScroll, setIsTooltipVisible, setTooltipMessage, setCur
             <LinkButton disabled={!isFormValid} type="submit" text={submitButtonText} to="" />
           </div>
         </form>
-        <LinkButton type="button" text="Выйти из аккаунта" color="red" />
+        <LinkButton type="button" text="Выйти из аккаунта" color="red" onClick={handleLogout} />
       </main>
     </section>
   )

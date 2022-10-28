@@ -68,3 +68,7 @@ export const dislikeMovie = (id) => {
     },
   }).then((res) => getResponse(res))
 }
+
+export const logOut = () => {
+  return fetch(`${BASE_URL}/signout`, { credentials: 'include' }).then((res) => getResponse(res))
+}

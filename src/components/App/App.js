@@ -19,27 +19,15 @@ function App() {
   const [isTooltipVisible, setIsTooltipVisible] = useState(false)
   const [tooltipMessage, setTooltipMessage] = useState({ message: '', status: '' })
 
-  console.log(currentUser)
-  // console.log(loggedIn)
-
   const routing = useRoutes(
     routes(loggedIn, setLoggedIn, currentUser, setCurrentUser, setLockScroll, setIsTooltipVisible, setTooltipMessage)
   )
 
   useEffect(() => {
-    checkUser()
-      .then((userData) => {
-        setCurrentUser({ ...currentUser, user: userData.data })
+    Promise.all([checkUser(), getLikedMovies()])
+      .then(([user, movies]) => {
+        setCurrentUser({ ...currentUser, user: user.data, likedFilms: movies.data })
         setLoggedIn(true)
-      })
-      .catch((err) => {
-        console.log(err)
-      })
-
-    getLikedMovies()
-      .then((data) => {
-        setCurrentUser({ ...currentUser, likedFilms: data.data })
-        // setLoggedIn(true)
       })
       .catch((err) => {
         console.log(err)

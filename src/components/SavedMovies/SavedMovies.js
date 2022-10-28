@@ -1,5 +1,5 @@
 import './SavedMovies.css'
-import { useEffect, useState, useContext } from 'react'
+import { useState, useContext } from 'react'
 import { UserContext } from '../../contexts/UserContext'
 import { dislikeMovie } from '../../utils/MainApi'
 import Footer from '../Footer/Footer'
@@ -53,7 +53,7 @@ function SavedMovies({ setLockScroll, setIsTooltipVisible, setTooltipMessage, se
   }
 
   return (
-    <section className='movies'>
+    <section className="movies">
       <Header setLockScroll={setLockScroll} />
       <main>
         <SearchForm

@@ -51,7 +51,7 @@ const routes = (
         setCurrentUser={setCurrentUser}
       />
     ) : (
-      <Navigate to="/signin" />
+      <Navigate to="/" />
     ),
   },
   {
@@ -64,20 +64,21 @@ const routes = (
         setCurrentUser={setCurrentUser}
       />
     ) : (
-      <Navigate to="/signin" />
+      <Navigate to="/" />
     ),
   },
   {
     path: '/profile',
     element: loggedIn ? (
       <Profile
+        setLoggedIn={setLoggedIn}
         setCurrentUser={setCurrentUser}
         setLockScroll={setLockScroll}
         setIsTooltipVisible={setIsTooltipVisible}
         setTooltipMessage={setTooltipMessage}
       />
     ) : (
-      <Navigate to="/signin" />
+      <Navigate to="/" />
     ),
   },
   {

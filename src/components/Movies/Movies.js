@@ -1,5 +1,5 @@
 import './Movies.css'
-import { useEffect, useState, useContext } from 'react'
+import { useState, useContext } from 'react'
 import { UserContext } from '../../contexts/UserContext'
 import { likeMovie, dislikeMovie } from '../../utils/MainApi'
 import { getMovies } from '../../utils/MoviesApi'
@@ -8,7 +8,6 @@ import Header from '../Header/Header'
 import MoviesCardList from '../MoviesCardList/MoviesCardList'
 import Preloader from '../Preloader/Preloader'
 import SearchForm from '../SearchForm/SearchForm'
-import ButtonOutlined from '../UI/ButtonOutlined/ButtonOutlined'
 
 function Movies({ setLockScroll, setIsTooltipVisible, setTooltipMessage, setCurrentUser }) {
   const currentUser = useContext(UserContext)
@@ -20,10 +19,7 @@ function Movies({ setLockScroll, setIsTooltipVisible, setTooltipMessage, setCurr
   const [searchValue, setSearchValue] = useState(currentUser.searchValue || '')
   const [isCheckboxChecked, setIsCheckboxChecked] = useState(currentUser.checkbox)
 
-  console.log(currentUser.likedFilms)
-
   const handleLike = (movie) => {
-    console.log(movie)
     const image = `https://api.nomoreparties.co/${movie.image.url}`
     const thumbnail = `https://api.nomoreparties.co/${movie.image.formats.thumbnail.url}`
     const movieId = movie.id
@@ -43,7 +39,6 @@ function Movies({ setLockScroll, setIsTooltipVisible, setTooltipMessage, setCurr
       movieId,
     })
       .then((mov) => {
-        console.log(mov)
         setCurrentUser({ ...currentUser, likedFilms: [...currentUser.likedFilms, mov.data] })
       })
       .catch((err) => {
@@ -52,14 +47,11 @@ function Movies({ setLockScroll, setIsTooltipVisible, setTooltipMessage, setCurr
   }
 
   const handleDislike = (id) => {
-    console.log(id)
+    const movie = currentUser.likedFilms.find((mov) => mov.movieId === id)
 
-    const movie = currentUser.likedFilms.find(mov => mov.movieId === id)
-    console.log(movie)
     dislikeMovie(movie._id)
       .then((mov) => {
-        console.log(mov)
-        const updatedLikedFilms = currentUser.likedFilms.filter(film => film._id !== movie._id)
+        const updatedLikedFilms = currentUser.likedFilms.filter((film) => film._id !== movie._id)
         setCurrentUser({ ...currentUser, likedFilms: updatedLikedFilms })
       })
       .catch((err) => {
@@ -91,7 +83,6 @@ function Movies({ setLockScroll, setIsTooltipVisible, setTooltipMessage, setCurr
     getMovies()
       .then((movies) => {
         const filteredMovies = filterMovies(movies)
-        console.log(filteredMovies)
         filteredMovies.length === 0 && setErrorText('Ничего не найдено')
         filteredMovies.length > 0 && setList(filteredMovies)
         setCurrentUser({
@@ -133,21 +124,14 @@ function Movies({ setLockScroll, setIsTooltipVisible, setTooltipMessage, setCurr
         />
 
         {!loading ? (
-          <>
-            <MoviesCardList
-              list={list}
-              errorText={errorText}
-              currentUser={currentUser}
-              setCurrentUser={setCurrentUser}
-              handleLike={handleLike}
-              handleDislike={handleDislike}
-            />
-            {list.length > 3 && (
-              <section className="movies__button">
-                <ButtonOutlined text="Еще" />
-              </section>
-            )}
-          </>
+          <MoviesCardList
+            list={list}
+            errorText={errorText}
+            currentUser={currentUser}
+            setCurrentUser={setCurrentUser}
+            handleLike={handleLike}
+            handleDislike={handleDislike}
+          />
         ) : (
           <Preloader />
         )}

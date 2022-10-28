@@ -25,7 +25,6 @@ function Login({ setLoggedIn, setIsTooltipVisible, setTooltipMessage }) {
 
     login({ email, password })
       .then((user) => {
-        console.log(user)
         setTooltipMessage({ message: 'Вы вошли, хорошего поиска фильмов', status: 'ok' })
         setIsTooltipVisible(true)
         setLoggedIn(true)

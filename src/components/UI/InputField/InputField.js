@@ -3,21 +3,21 @@ import './InputField.css'
 function InputField({ type, name, placeholder, onChange, required, minLength, maxLength, error }) {
   return (
     <>
-      <div className='input'>
+      <div className="input">
         <input
-          className='input__field'
+          className="input__field"
           type={type}
           name={name}
           onChange={onChange}
           required={required}
-          placeholder=' '
+          placeholder=" "
           minLength={minLength}
           maxLength={maxLength}
         />
-        <label className='input__label' htmlFor={name}>
+        <label className="input__label" htmlFor={name}>
           {placeholder}
         </label>
-        <span className='input__error'>{error}</span>
+        <span className="input__error">{error}</span>
       </div>
     </>
   )

@@ -17,8 +17,13 @@
 }
 
 .movies-list__empty {
-    /* padding: 0 0 70px; */
     min-height: 250px;
+}
+
+.movies-list__button {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 80px;
 }
 
 @media (max-width: 1050px) {
