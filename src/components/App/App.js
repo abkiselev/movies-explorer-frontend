@@ -9,15 +9,17 @@ import ToolTip from '../ToolTip/ToolTip'
 function App() {
   const [currentUser, setCurrentUser] = useState({
     user: {},
-    films: [],
+    // films: [],
     likedFilms: [],
-    searchValue: '',
-    checkbox: false,
+    // searchValue: '',
+    // checkbox: false,
   })
   const [loggedIn, setLoggedIn] = useState(false)
   const [lockScroll, setLockScroll] = useState(false)
   const [isTooltipVisible, setIsTooltipVisible] = useState(false)
   const [tooltipMessage, setTooltipMessage] = useState({ message: '', status: '' })
+
+  console.log(currentUser)
 
   const routing = useRoutes(
     routes(loggedIn, setLoggedIn, currentUser, setCurrentUser, setLockScroll, setIsTooltipVisible, setTooltipMessage)
@@ -31,6 +33,9 @@ function App() {
       })
       .catch((err) => {
         console.log(err)
+        setCurrentUser({})
+        localStorage.reset()
+        setLoggedIn(false)
       })
   }, [loggedIn])
 

@@ -1,5 +1,5 @@
 import './Movies.css'
-import { useState, useContext } from 'react'
+import { useState, useContext, useEffect } from 'react'
 import { UserContext } from '../../contexts/UserContext'
 import { likeMovie, dislikeMovie } from '../../utils/MainApi'
 import { getMovies } from '../../utils/MoviesApi'
@@ -8,16 +8,34 @@ import Header from '../Header/Header'
 import MoviesCardList from '../MoviesCardList/MoviesCardList'
 import Preloader from '../Preloader/Preloader'
 import SearchForm from '../SearchForm/SearchForm'
+import { SHORT_FILM_DURATION } from '../../utils/Constants'
 
 function Movies({ setLockScroll, setIsTooltipVisible, setTooltipMessage, setCurrentUser }) {
   const currentUser = useContext(UserContext)
-  const [list, setList] = useState(currentUser.films)
+  const [list, setList] = useState(JSON.parse(localStorage.getItem('list')) || [])
+  const [allMovies, setAllMovies] = useState(JSON.parse(localStorage.getItem('allMovies')) || [])
   const [loading, setLoading] = useState(false)
-  const [errorText, setErrorText] = useState(
-    currentUser.films.length === 0 && currentUser.searchValue ? 'Ничего не найдено' : ''
+  const [errorText, setErrorText] = useState('')
+  const [searchValue, setSearchValue] = useState(localStorage.getItem('searchValue') || '')
+  const [isCheckboxChecked, setIsCheckboxChecked] = useState(
+    JSON.parse(localStorage.getItem('isCheckboxChecked')) || false
   )
-  const [searchValue, setSearchValue] = useState(currentUser.searchValue || '')
-  const [isCheckboxChecked, setIsCheckboxChecked] = useState(currentUser.checkbox)
+
+  useEffect(() => {
+    localStorage.setItem('list', JSON.stringify(list))
+  }, [list])
+
+  useEffect(() => {
+    localStorage.setItem('searchValue', searchValue)
+  }, [searchValue])
+
+  useEffect(() => {
+    localStorage.setItem('isCheckboxChecked', isCheckboxChecked)
+  }, [isCheckboxChecked])
+
+  useEffect(() => {
+    localStorage.setItem('allMovies', JSON.stringify(allMovies))
+  }, [allMovies])
 
   const handleLike = (movie) => {
     const image = `https://api.nomoreparties.co/${movie.image.url}`
@@ -62,7 +80,7 @@ function Movies({ setLockScroll, setIsTooltipVisible, setTooltipMessage, setCurr
   const filterMovies = (movies) => {
     return movies.filter(
       (movie) =>
-        (isCheckboxChecked ? movie.duration <= 40 : movie.duration > 0) &&
+        (isCheckboxChecked ? movie.duration <= SHORT_FILM_DURATION : movie.duration > 0) &&
         (movie.nameRU.toLowerCase().includes(searchValue.toLowerCase()) ||
           movie.nameEN.toLowerCase().includes(searchValue.toLowerCase()))
     )
@@ -77,20 +95,23 @@ function Movies({ setLockScroll, setIsTooltipVisible, setTooltipMessage, setCurr
       return
     }
 
+    if (allMovies.length > 0) {
+      setLoading(true)
+      setList([])
+      const filteredMovies = filterMovies(allMovies)
+      filteredMovies.length === 0 ? setErrorText('Ничего не найдено') : setList(filteredMovies)
+      setLoading(false)
+      return
+    }
+
     setLoading(true)
     setList([])
 
     getMovies()
       .then((movies) => {
+        setAllMovies(movies)
         const filteredMovies = filterMovies(movies)
-        filteredMovies.length === 0 && setErrorText('Ничего не найдено')
-        filteredMovies.length > 0 && setList(filteredMovies)
-        setCurrentUser({
-          ...currentUser,
-          films: filteredMovies,
-          searchValue,
-          checkbox: isCheckboxChecked,
-        })
+        filteredMovies.length === 0 ? setErrorText('Ничего не найдено') : setList(filteredMovies)
       })
       .catch((err) => {
         console.log(err)
@@ -105,22 +126,16 @@ function Movies({ setLockScroll, setIsTooltipVisible, setTooltipMessage, setCurr
   }
 
   return (
-    <section className="movies">
+    <section className='movies'>
       <Header setLockScroll={setLockScroll} />
       <main>
         <SearchForm
-          setList={setList}
-          setLoading={setLoading}
-          setErrorText={setErrorText}
-          setIsTooltipVisible={setIsTooltipVisible}
-          setTooltipMessage={setTooltipMessage}
-          currentUser={currentUser}
-          setCurrentUser={setCurrentUser}
           searchValue={searchValue}
           setSearchValue={setSearchValue}
           isCheckboxChecked={isCheckboxChecked}
           setIsCheckboxChecked={setIsCheckboxChecked}
           handleSumbit={handleSumbit}
+          loading={loading}
         />
 
         {!loading ? (

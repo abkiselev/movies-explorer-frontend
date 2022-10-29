@@ -1,6 +1,6 @@
 import './InputField.css'
 
-function InputField({ type, name, placeholder, onChange, required, minLength, maxLength, error }) {
+function InputField({ type, name, placeholder, onChange, required, minLength, maxLength, error, disabled }) {
   return (
     <>
       <div className="input">
@@ -13,6 +13,7 @@ function InputField({ type, name, placeholder, onChange, required, minLength, ma
           placeholder=" "
           minLength={minLength}
           maxLength={maxLength}
+          disabled={disabled}
         />
         <label className="input__label" htmlFor={name}>
           {placeholder}

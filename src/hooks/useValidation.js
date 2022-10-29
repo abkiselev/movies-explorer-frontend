@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { emailRegexp } from '../utils/regexp'
 
 function UseValidation() {
   const [values, setValues] = useState({})
@@ -8,8 +9,16 @@ function UseValidation() {
 
   function handleValues(e) {
     setValues({ ...values, [e.target.name]: e.target.value })
-    setIsValuesValid({ ...isValuesValid, [e.target.name]: e.target.validity.valid })
-    setErrors({ ...errors, [e.target.name]: e.target.validationMessage })
+
+    switch (e.target.name) {
+      case 'email':
+        validateEmail(e.target.value)
+        break
+      default:
+        setErrors({ ...errors, [e.target.name]: e.target.validationMessage })
+        setIsValuesValid({ ...isValuesValid, [e.target.name]: e.target.validity.valid })
+        break
+    }
   }
 
   function setInitialValues(initialInputs) {
@@ -18,8 +27,21 @@ function UseValidation() {
     setErrors(initialInputs)
   }
 
+  function validateEmail(inputText) {
+    if (!String(inputText).toLowerCase().match(emailRegexp)) {
+      setErrors({ ...errors, email: 'Пока это не похоже на e-mail...' })
+      setIsValuesValid({ ...isValuesValid, email: false })
+    } else {
+      setErrors({ ...errors, email: '' })
+      setIsValuesValid({ ...isValuesValid, email: true })
+    }
+  }
+
   useEffect(() => {
-    if (Object.values(isValuesValid).every((i) => i === true) && Object.values(isValuesValid).length !== 0) {
+    if (
+      Object.values(isValuesValid).every((i) => i === true) &&
+      Object.values(isValuesValid).length !== 0
+    ) {
       setIsFormValid(true)
     } else {
       setIsFormValid(false)

@@ -7,6 +7,7 @@ import Header from '../Header/Header'
 import MoviesCardList from '../MoviesCardList/MoviesCardList'
 import Preloader from '../Preloader/Preloader'
 import SearchForm from '../SearchForm/SearchForm'
+import { SHORT_FILM_DURATION } from '../../utils/Constants'
 
 function SavedMovies({ setLockScroll, setIsTooltipVisible, setTooltipMessage, setCurrentUser }) {
   const currentUser = useContext(UserContext)
@@ -32,7 +33,7 @@ function SavedMovies({ setLockScroll, setIsTooltipVisible, setTooltipMessage, se
 
     const filteredMovies = currentUser.likedFilms.filter(
       (movie) =>
-        (isCheckboxChecked ? movie.duration <= 40 : movie.duration > 0) &&
+        (isCheckboxChecked ? movie.duration <= SHORT_FILM_DURATION : movie.duration > 0) &&
         (movie.nameRU.toLowerCase().includes(searchValue.toLowerCase()) ||
           movie.nameEN.toLowerCase().includes(searchValue.toLowerCase()))
     )
@@ -53,17 +54,10 @@ function SavedMovies({ setLockScroll, setIsTooltipVisible, setTooltipMessage, se
   }
 
   return (
-    <section className="movies">
+    <section className='movies'>
       <Header setLockScroll={setLockScroll} />
       <main>
         <SearchForm
-          setList={setList}
-          setLoading={setLoading}
-          setErrorText={setErrorText}
-          setIsTooltipVisible={setIsTooltipVisible}
-          setTooltipMessage={setTooltipMessage}
-          currentUser={currentUser}
-          setCurrentUser={setCurrentUser}
           searchValue={searchValue}
           setSearchValue={setSearchValue}
           isCheckboxChecked={isCheckboxChecked}

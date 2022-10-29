@@ -1,5 +1,4 @@
-const BASE_URL = 'https://api.kiselevab.nomoredomains.icu'
-// const BASE_URL = 'http://localhost:3000'
+import { BASE_URL } from "./Constants"
 
 const getResponse = (res) => {
   return res.json().then((json) => {

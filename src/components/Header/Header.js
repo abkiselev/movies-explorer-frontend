@@ -25,7 +25,7 @@ function Header({ setLockScroll, onLoginClick }) {
           <img className="header__logo" src={logo} alt="Поиск фильмов" />
         </Link>
 
-        {currentUser.user.name ? (
+        {currentUser.user?.name ? (
           <>
             <nav className={`header__nav ${isMenuChecked && 'header__nav_visible'}`}>
               <ul className="header__links header__links_main">

@@ -23,15 +23,20 @@ const routes = (
   {
     path: '/signup',
     element: loggedIn ? (
-      <Navigate to="/movies" />
+      <Navigate to='/movies' />
     ) : (
-      <Register setIsTooltipVisible={setIsTooltipVisible} setTooltipMessage={setTooltipMessage} />
+      <Register
+        setLoggedIn={setLoggedIn}
+        setCurrentUser={setCurrentUser}
+        setIsTooltipVisible={setIsTooltipVisible}
+        setTooltipMessage={setTooltipMessage}
+      />
     ),
   },
   {
     path: '/signin',
     element: loggedIn ? (
-      <Navigate to="/movies" />
+      <Navigate to='/movies' />
     ) : (
       <Login
         setLoggedIn={setLoggedIn}
@@ -51,7 +56,7 @@ const routes = (
         setCurrentUser={setCurrentUser}
       />
     ) : (
-      <Navigate to="/" />
+      <Navigate to='/' />
     ),
   },
   {
@@ -64,7 +69,7 @@ const routes = (
         setCurrentUser={setCurrentUser}
       />
     ) : (
-      <Navigate to="/" />
+      <Navigate to='/' />
     ),
   },
   {
@@ -78,7 +83,7 @@ const routes = (
         setTooltipMessage={setTooltipMessage}
       />
     ) : (
-      <Navigate to="/" />
+      <Navigate to='/' />
     ),
   },
   {

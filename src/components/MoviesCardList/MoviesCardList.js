@@ -2,10 +2,15 @@ import './MoviesCardList.css'
 import { useEffect, useState } from 'react'
 import MoviesCard from '../MoviesCard/MoviesCard'
 import ButtonOutlined from '../UI/ButtonOutlined/ButtonOutlined'
+import { CARDS_SETUP } from '../../utils/Constants'
 
 function MoviesCardList({ list, errorText, currentUser, setCurrentUser, handleDislike, handleLike }) {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth)
-  const [cardsSetup, setCardsSetup] = useState({ cards: 0, toAdd: 0 })
+  const [cardsSetup, setCardsSetup] = useState({})
+
+  useEffect(() => {
+    setCards()
+  }, [list]);
 
   const detectSize = () => {
     setTimeout(() => {
@@ -13,13 +18,15 @@ function MoviesCardList({ list, errorText, currentUser, setCurrentUser, handleDi
     }, 1000)
   }
 
+  console.log(cardsSetup)
+
   const setCards = () => {
     if (windowWidth > 320 && windowWidth < 480) {
-      setCardsSetup({ cards: 5, toAdd: 1 })
+      setCardsSetup(CARDS_SETUP.MOBILE_SCREEN)
     } else if (windowWidth > 480 && windowWidth < 925) {
-      setCardsSetup({ cards: 8, toAdd: 2 })
+      setCardsSetup(CARDS_SETUP.TABLET_SCREEN)
     } else {
-      setCardsSetup({ cards: 12, toAdd: 3 })
+      setCardsSetup(CARDS_SETUP.DESKTOP_SCREEN)
     }
   }
 
@@ -56,7 +63,7 @@ function MoviesCardList({ list, errorText, currentUser, setCurrentUser, handleDi
             <h3 className="movies-list__empty">{errorText}</h3>
           )}
         </ul>
-        {list.length > 3 && list.length >= cardsSetup.cards && (
+        {list.length > 3 && list.length > cardsSetup.cards && (
           <section className="movies-list__button">
             <ButtonOutlined onClick={onAdd} text="Еще" />
           </section>
