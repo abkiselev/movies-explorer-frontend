@@ -1,29 +1,58 @@
 import './App.css'
-import { Routes, Route } from 'react-router-dom'
-import Main from '../Main/Main'
-import Movies from '../Movies/Movies'
-import Register from '../Register/Register'
-import Login from '../Login/Login'
-import Error from '../Error/Error'
-import Profile from '../Profile/Profile'
-import SavedMovies from '../SavedMovies/SavedMovies'
-import { useState } from 'react'
+import { useRoutes } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import { UserContext } from '../../contexts/UserContext'
+import routes from '../../utils/routes'
+import { checkUser, getLikedMovies } from '../../utils/MainApi'
+import ToolTip from '../ToolTip/ToolTip'
 
 function App() {
+  const [currentUser, setCurrentUser] = useState({
+    user: {},
+    // films: [],
+    likedFilms: [],
+    // searchValue: '',
+    // checkbox: false,
+  })
+  const [loggedIn, setLoggedIn] = useState(false)
   const [lockScroll, setLockScroll] = useState(false)
-  console.log(lockScroll)
+  const [isTooltipVisible, setIsTooltipVisible] = useState(false)
+  const [tooltipMessage, setTooltipMessage] = useState({ message: '', status: '' })
+
+  console.log(currentUser)
+
+  const routing = useRoutes(
+    routes(loggedIn, setLoggedIn, currentUser, setCurrentUser, setLockScroll, setIsTooltipVisible, setTooltipMessage)
+  )
+
+  useEffect(() => {
+    Promise.all([checkUser(), getLikedMovies()])
+      .then(([user, movies]) => {
+        setCurrentUser({ ...currentUser, user: user.data, likedFilms: movies.data })
+        setLoggedIn(true)
+      })
+      .catch((err) => {
+        console.log(err)
+        setCurrentUser({})
+        localStorage.reset()
+        setLoggedIn(false)
+      })
+  }, [loggedIn])
+
+  useEffect(() => {
+    if (isTooltipVisible) {
+      setTimeout(() => {
+        setIsTooltipVisible(false)
+      }, 2500)
+    }
+  }, [isTooltipVisible])
 
   return (
     <section className={`app ${lockScroll && 'app_locked'}`}>
-      <Routes>
-        <Route path='/' element={<Main setLockScroll={setLockScroll} />} />
-        <Route path='/movies' element={<Movies setLockScroll={setLockScroll} />} />
-        <Route path='/saved-movies' element={<SavedMovies setLockScroll={setLockScroll} />} />
-        <Route path='/signup' element={<Register />} />
-        <Route path='/signin' element={<Login />} />
-        <Route path='/profile' element={<Profile setLockScroll={setLockScroll} />} />
-        <Route path='*' element={<Error />} />
-      </Routes>
+      <UserContext.Provider value={currentUser}>
+        {routing}
+        <ToolTip isTooltipVisible={isTooltipVisible} tooltipMessage={tooltipMessage} />
+      </UserContext.Provider>
     </section>
   )
 }

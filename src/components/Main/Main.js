@@ -30,7 +30,7 @@ function Main({ setLockScroll }) {
   }
 
   return (
-    <section className='main'>
+    <section className="main">
       <Header setLockScroll={setLockScroll} onLoginClick={onLoginClick} />
       <main>
         <Promo />

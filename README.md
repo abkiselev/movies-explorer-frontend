@@ -1,5 +1,7 @@
 # Фронтенд дипломного проекта
 
-ссылка на дизайн - https://disk.yandex.ru/d/cVp52CVbFDSTTA
+ссылка на Пулреквест 3-го этапа - https://github.com/abkiselev/movies-explorer-frontend/pull/2
 
-чтобы увидеть Хедэр Юзера - надо поменять стейт user на true в компоненте Header 
+ссылка на проект - https://kiselevab.nomoredomains.icu
+
+ссылка на дизайн - https://disk.yandex.ru/d/cVp52CVbFDSTTA

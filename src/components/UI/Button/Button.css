@@ -24,6 +24,12 @@
     opacity: 0.8;
 }
 
+.button:disabled {
+    background-color: grey;
+    opacity: 0.3;
+    pointer-events: none;
+}
+
 @media (max-width: 450px) {
     .button {
         font-size: 12px;
